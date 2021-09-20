@@ -2,7 +2,8 @@
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+header('Access-Control-Allow-Methods: GET, POST');
+header('Allow: GET, POST');
 header('Content-type: application/json');
 
 ini_set("default_charset", "UTF-8");
@@ -12,7 +13,6 @@ require '../controllers/usersController.php';
 
 // Se requieren las funciones.
 require '../controllers/functions/validationClass.php';
-require '../controllers/functions/emailController.php';
 
 /**
  * Clase que recibe y reenvía los datos.
@@ -30,26 +30,42 @@ class usersReception extends validationClass {
 
 			// Registrar usuario.
 			case 'createUser':
-				if ($this->isEmpty($_POST)) {
-					return $this->controller->createUsers($this->noScapesStrings($_POST['usersBasicInformation']['email']), $this->noScapesStrings($_POST['usersBasicInformation']['name']), $this->noScapesStrings($_POST['usersBasicInformation']['lastName']), $_POST['usersBasicInformation']['phoneNumber'], $this->noScapesStrings($_POST['usersBasicInformation']['gender']), $_POST['usersBasicInformation']['birthday'], $this->noScapesStrings($_POST['usersBasicInformation']['job']), $this->encryptPassword($_POST['usersBasicInformation']['password']), $_POST['firstMetrics']['rh'], $_POST['firstMetrics']['weight'], $_POST['firstMetrics']['height'], $_POST['acceptPolitics'], $this->encryptToken($_POST['usersBasicInformation']['email']));
-				}else {
-					return 'Se requieren todos los datos.';
-				}
+				return $this->callCreateUser();
 				break;
 
-			// Consultar los datos del usuario que desea registrarse.
-			case 'readDataUserLogin':
-				if ($this->isEmpty($_POST)) {
-					return $this->controller->readDataUserLogin($this->noScapesStrings($_POST['dataUserLogin']['emailLogin']), $this->encryptPassword($_POST['dataUserLogin']['password']));
-				}else {
-					return 'Se requieren todos los datos.';
-				}
+			// Leer los datos para el login.
+			case 'loginUser':
+				return $this->callLoginUser();
+				break;
+
+			// Confirmar usuarios.
+			case 'confirmUser':
+				return $this->callConfirmUser();
 				break;
 
 			default:
-				return 'No se ha podido realizar la acción.';
-				break;
+			return 'No se ha podido realizar la acción.';
+			break;
 		}
+	}
+
+	// Se llama la función para registrar el usuario.
+	private function callCreateUser() {
+		if ($this->isEmpty($_POST) && $this->validateEmail($_POST['user']['email']) && $this->validLong($_POST['user']['password'], 8) && $this->validateJustString($_POST['user']['name']) && $this->validateJustString($_POST['user']['lastName']) && $this->validBirthday($_POST['user']['birthday']) && $this->validateJustNumbers($_POST['user']['school'])) {
+			return $this->controller->createUsers($this->noScapesStrings($_POST['user']['email']), $this->encryptPassword($_POST['user']['password']), $this->setNames($_POST['user']['name']), $this->setNames($_POST['user']['lastName']), $_POST['user']['birthday'], $this->setMayus($this->encryptToken($_POST['user']['email'] . '' . $_POST['user']['password'] . '' . $_POST['user']['name'] . '' . $_POST['user']['lastName'])), $_POST['user']['school']);
+		}else {
+			return $this->validBirthday($_POST['user']['birthday']);
+		}
+	}
+
+	// Se llama la función para iniciar sesión.
+	private function callLoginUser() {
+		return $this->isEmpty($_POST) && $this->validateEmail($_POST['user']['email']) && $this->validLong($_POST['user']['password'], 8) ? $this->controller->loginUser($this->noScapesStrings($_POST['user']['email']), $this->encryptPassword($_POST['user']['password'])) : 'Los datos no coinciden.';
+	}
+
+	// Llamar a la función para confirmar usuario.
+	private function callConfirmUser() : bool {
+		return $this->isEmpty($_POST) ? $this->controller->confirmUser($this->noScapesStrings($_POST['token'])) : false;
 	}
 
 }

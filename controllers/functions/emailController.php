@@ -78,8 +78,8 @@ class emailController {
 			$this->mail->setFrom('contacto@valtec.systems', 'ValTec');
 
 			//Crear receptores.
-			$this->mail->addAddress('santiagocorreaaguirre14@gmail.com');
-			$this->mail->addReplyTo($this->emailTransmitter);
+			$this->mail->addAddress($this->emailTransmitter);
+			//$this->mail->addReplyTo($this->emailTransmitter);
 
 			//Contenido del correo.
 			$this->mail->isHTML(true);                                 		   // Set email format to HTML
