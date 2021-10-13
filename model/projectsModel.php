@@ -24,4 +24,24 @@ class projectsModel {
 		return $this->connection->getExecute($this->connection->getBindValue(true, $this->connection->getPrepareStatement(['ProjectsModel', 'createObjectives']), $objective, ['__construct', 'getId']));
 	}
 
+	// Registrar autores.
+	public function createAuthorsDB(authorsClass $author) : bool {
+		return $this->connection->getExecute($this->connection->getBindValue(true, $this->connection->getPrepareStatement(['ProjectsModel', 'createAuthors']), $author, ['__construct', 'getId']));
+	}
+
+	// Registrar impactos.
+	public function createImpactsDB(impactsClass $impact) : bool {
+		return $this->connection->getExecute($this->connection->getBindValue(true, $this->connection->getPrepareStatement(['ProjectsModel', 'createImpacts']), $author, ['__construct', 'getId']));
+	}
+
+	// Registrar resultados.
+	public function createResultsDB(resultsClass $result) : bool {
+		return $this->connection->getExecute($this->connection->getBindValue(true, $this->connection->getPrepareStatement(['ProjectsModel', 'createResults']), $author, ['__construct', 'getId']));
+	}
+
+	// Registrar resultados.
+	public function createProductsDB(productsClass $result) : bool {
+		return $this->connection->getExecute($this->connection->getBindValue(true, $this->connection->getPrepareStatement(['ProjectsModel', 'createProducts']), $author, ['__construct', 'getId']));
+	}
+
 }
