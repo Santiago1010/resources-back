@@ -51,10 +51,10 @@ class usersReception extends validationClass {
 
 	// Se llama la función para registrar el usuario.
 	private function callCreateUser() {
-		if ($this->isEmpty($_POST) && $this->validateEmail($_POST['user']['email']) && $this->validLong($_POST['user']['password'], 8) && $this->validateJustString($_POST['user']['name']) && $this->validateJustString($_POST['user']['lastName']) && $this->validBirthday($_POST['user']['birthday']) && $this->validateJustNumbers($_POST['user']['school'])) {
+		if ($this->isEmpty($_POST) && $this->validateEmail($_POST['user']['email']) && $this->validLong($_POST['user']['password'], 8) && $this->validateJustString($_POST['user']['name']) && $this->validateJustString($_POST['user']['lastName']) && $this->validateJustNumbers($_POST['user']['school'])) {
 			return $this->controller->createUsers($this->noScapesStrings($_POST['user']['email']), $this->encryptPassword($_POST['user']['password']), $this->setNames($_POST['user']['name']), $this->setNames($_POST['user']['lastName']), $_POST['user']['birthday'], $this->setMayus($this->encryptToken($_POST['user']['email'] . '' . $_POST['user']['password'] . '' . $_POST['user']['name'] . '' . $_POST['user']['lastName'])), $_POST['user']['school']);
 		}else {
-			return $this->validBirthday($_POST['user']['birthday']);
+			return false;
 		}
 	}
 

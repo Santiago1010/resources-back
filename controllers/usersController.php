@@ -24,7 +24,7 @@ class usersController extends securityCraft {
 	/* C: Crear */
 
 	// Registrar usuarios.
-	public function createUsers(string $email, string $password, string $name, string $lastName, string $dateBorn, string $token, int $school) : bool {
+	public function createUsers(string $email, string $password, string $name, string $lastName, string $dateBorn, string $token, int $school) : string|bool {
 		return $this->model->readUserExistDB(new usersClass(NULL, $email))['exist'] == 0 ? (($this->model->createUsersDB(new usersClass(NULL, $email, $this->encryptRSA($this->encryptHash($password)), $name, $lastName, $dateBorn, 'Sin confirmar', $token, $school)) ? $this->sendEmailConfirm($name, $lastName, $email, $token) : false)) : false;
 	}
 
