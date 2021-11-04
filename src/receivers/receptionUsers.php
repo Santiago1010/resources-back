@@ -1,27 +1,23 @@
 <?php
 
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
-header('Content-type: application/json');
+include_once '../../manifest/imports.php';
 
-ini_set("default_charset", "UTF-8");
+namespace Src\receivers;
 
-// Se traen las funciones.
-require '../controllers/functions/validationClass.php';
-
-// Se traen los controladores.
-require '../controllers/usersController.php';
+use Src\controllers\traits\validation;
 
 /**
  * Clase que recibirá los datos y las acciones de los usuarios.
  */
-class receptionUsers extends validationClass {
+class receptionUsers {
+
+	use validation;
 
 	private $usersController;
 	
 	public function __construct() {
-		$this->usersController = new usersController();
+		//$this->usersController = new usersController();
+		$this->hola();
 	}
 
 	public function invokerController() : bool|int|string	{

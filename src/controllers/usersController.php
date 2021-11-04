@@ -1,11 +1,13 @@
 <?php
 
+namespace Src\controllers;
+
 // Se traen las cápsulas.
 require '../controllers/capsules/usersClass.php';
 
 // Se traen las funciones.
-require '../controllers/functions/emailController.php';
-require '../controllers/functions/securityCraft.php';
+//require '../controllers/functions/emailController.php';
+//require '../controllers/functions/securityCraft.php';
 
 // Se trae el modelo.
 require '../model/usersModel.php';
@@ -13,7 +15,7 @@ require '../model/usersModel.php';
 /**
  * Clase que cotrola y gestiona los datos de los usuarios.
  */
-class usersController extends securityCraft {
+class usersController {
 	
 	private $model;
 
