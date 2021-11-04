@@ -1,8 +1,8 @@
 <?php
 
-define('PRUBIC_KEYÑ', 'db89bb5ceab87f9c0fcc2ab36c189c2c');
-
 namespace Src\controllers\traits;
+
+define('PRUBIC_KEYÑ', 'db89bb5ceab87f9c0fcc2ab36c189c2c');
 
 trait security {
 

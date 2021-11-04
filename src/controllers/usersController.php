@@ -3,23 +3,24 @@
 namespace Src\controllers;
 
 // Se traen las cápsulas.
-require '../controllers/capsules/usersClass.php';
+//require '../controllers/capsules/usersClass.php';
 
-// Se traen las funciones.
-//require '../controllers/functions/emailController.php';
-//require '../controllers/functions/securityCraft.php';
+// Se usan los traits.
+use Src\controllers\traits\security;
 
-// Se trae el modelo.
-require '../model/usersModel.php';
+// Se usa el modelo.
+use Src\models\usersModel;
 
 /**
  * Clase que cotrola y gestiona los datos de los usuarios.
  */
 class usersController {
+
+	use security;
 	
 	private $model;
 
-	public function __construct(?string $rol) {
+	public function __construct(?string $rol = NULL) {
 		$this->model = new usersModel($rol);
 	}
 

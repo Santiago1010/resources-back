@@ -1,6 +1,9 @@
 <?php
 
-include '../model/functions/connection.php';
+namespace Src\models;
+
+// Se usa la conexión.
+use Manifest\connection;
 
 /**
  * Clase que conecta con la base de datos de los usuarios.
@@ -8,10 +11,10 @@ include '../model/functions/connection.php';
 class usersModel {
 
 	private $connection;
-	private $rol;
 	
-	public function __construct(?string $rol) {
-		$this->rol = $rol;
+	public function __construct(
+		private ?string $rol = NULL
+	) {
 		$this->connection = connection::getInstance($rol);
 	}
 
