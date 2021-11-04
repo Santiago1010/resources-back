@@ -2,7 +2,7 @@
 
 namespace Src\controllers\traits;
 
-trait validation {	
+trait validation {
 	protected function isEmpty(int|string $data, array $ignore = NULL) : bool {
 		$val = true;
 

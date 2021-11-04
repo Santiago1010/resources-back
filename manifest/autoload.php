@@ -9,8 +9,6 @@ ini_set("default_charset", "UTF-8");
 
 date_default_timezone_set('America/Bogota');
 
-function autoload(string $clase) {
+spl_autoload_register(function(string $clase) {
 	include_once $clase . '.php';
-}
-
-spl_autoload_register('autoload');
+});

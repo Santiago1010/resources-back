@@ -27,8 +27,8 @@ class usersController {
 	}
 
 	// Se registra el usuario y si devuelve true, envía el correo electrónico; de lo contrario, devuelve false.
-	public function createUser(string $documentType, int $document, string $name, string $lastName, string $email, ?int $phone = NULL, string $password, string $token, string $rol, int $regional, int $center) : bool {
-		return $this->model->readUserExistDB(new usersClass(NULL, $document)) ? ($this->model->createUserDB(new usersClass($documentType, $document, $name, $lastName, $email, $phone, $this->encryptRSA($this->encryptHash($password)), $token, 'Sin confirmar', $rol, $regional, $center)) ? $this->sendEmailConfirm($name, $lastName, $email, $token) : false) : false;
+	public function createUser(int $document, string $name, string $lastName, string $email, ?int $phone = NULL, string $password, string $token, string $rol) : bool {
+		return $this->model->readUserExistDB(new usersClass(NULL, $document)) ? ($this->model->createUserDB(new usersClass($documentType, $document, $name, $lastName, $email, $phone, $this->encryptRSA($this->encryptHash($password)), $token, $rol,)) ? $this->sendEmailConfirm($name, $lastName, $email, $token) : false) : false;
 	}
 
 	// Se confirma el correo electrónico del usuario.
@@ -37,15 +37,15 @@ class usersController {
 	}
 
 	// Se envía el correo de confirmación.
-	private function sendEmailConfirm(string $name, string $lastName, string $emailConfirm, string $token) : bool {
-		$email = new emailController($name . ' ' . $lastName, $emailConfirm, 'CORREO DE CONFIRMACIÓN', NULL, $token);
+	private function sendEmailConfirm(string $name, string $lastName, string $email, string $token) : bool {
+		$email = new emailController($name . ' ' . $lastName, $email, 'CORREO DE CONFIRMACIÓN', NULL, $token);
 		return $email->sendConfirmEmail();
 	}
 
 	// Se envía correo para recuperar la contraseña.
-	public function sendEmailPassword(int $document, string $name, string $lastName, string $emailConfirm, string $token) : bool {
+	public function sendEmailPassword(int $document, string $name, string $lastName, string $email, string $token) : bool {
 		if ($this->model->setTokenDB(new usersClass(NULL, $document, NULL, NULL, NULL, NULL, NULL, $token))) {
-			$email = new emailController($name . ' ' . $lastName, $emailConfirm, 'CORREO PARA RECUPERACIÓN DE CONTRASEÑA', NULL, $token);
+			$email = new emailController($name . ' ' . $lastName, $email, 'CORREO PARA RECUPERACIÓN DE CONTRASEÑA', NULL, $token);
 			return $email->sendRecoverPasswordEmail();
 		}else {
 			return false;

@@ -20,7 +20,7 @@ class connection {
 	private string $db_name = "new_valtec";
 	private string $user = "root";
 	private string $port = "3306";
-	private string $password = ""/*"X(HLWFb[(Z/8etgc"*/;
+	private string $password = ""/;
 	private $options = [
 		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -88,9 +88,9 @@ class connection {
 			];
 
 			$sql_list = [
-				"users" => [
+				"UsersModel" => [
 					"create" => "INSERT INTO {$tables['users']} (users_name, users_last_name) VALUES (?,?)",
-					"read" => "SELECT * FROM {$tables['users']}",
+					"read_users_data" => "SELECT * FROM {$tables['users']}",
 					"update" => "UPDATE {$tables['users']} SET users_name=?, users_last_name=? WHERE idusers=?",
 					"delete" => "DELETE FROM {$tables['users']} WHERE idusers=?"
 				]
