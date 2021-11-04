@@ -1,5 +1,7 @@
 <?php
 
+namespace Src\models\capsules;
+
 /**
  * Clase que encapsula los datos de los usuarios.
  */

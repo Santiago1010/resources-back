@@ -2,11 +2,7 @@
 
 namespace Src\controllers\traits;
 
-trait validation {
-	public function hola() {
-		echo 'Hola, mundo';
-	}
-	
+trait validation {	
 	protected function isEmpty(int|string $data, array $ignore = NULL) : bool {
 		$val = true;
 

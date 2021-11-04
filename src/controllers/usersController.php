@@ -3,10 +3,11 @@
 namespace Src\controllers;
 
 // Se traen las cápsulas.
-//require '../controllers/capsules/usersClass.php';
+use Src\models\capsules\usersClass;
 
 // Se usan los traits.
 use Src\controllers\traits\security;
+use Src\controllers\traits\validation;
 
 // Se usa el modelo.
 use Src\models\usersModel;
@@ -17,6 +18,7 @@ use Src\models\usersModel;
 class usersController {
 
 	use security;
+	use validation;
 	
 	private $model;
 
