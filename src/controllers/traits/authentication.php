@@ -1,11 +1,11 @@
 <?php
 
-namespace Src\controllers\traits;
+namespace Src\Controllers\Traits;
 
-use Src\controllers\security;
+use Src\Controllers\Security;
 
-trait authentication {
+trait Authentication {
 
-	use security;
+	use Security;
 	
 }

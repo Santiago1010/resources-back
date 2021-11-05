@@ -1,19 +1,19 @@
 <?php
 
-namespace Src\listener;
+namespace Src\Listener;
 
 // Se usan los traits.
-use Src\controllers\traits\responses; // Trait para gestionar las respuestas.
+use Src\controllers\traits\Responses; // Trait para gestionar las respuestas.
 
 // Se usan los controladores.
-use Src\controllers\usersController;
+use Src\controllers\UsersController;
 
 /**
  * Clase que escucha todas las peticiones.
  */
-class listener {
+class Listener {
 
-    use responses;
+    use Responses;
 
     public function actionListener(string $type, array $data) : string {
         $request = [];

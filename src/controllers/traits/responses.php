@@ -1,8 +1,8 @@
 <?php
 
-namespace Src\controllers\traits;
+namespace Src\Controllers\Traits;
 
-trait responses {
+trait Responses {
 	private array $response = ["status" => "done", "result" => []];
 
 	/*---------- RESPUESTAS DE ÉXTIO. ----------*/

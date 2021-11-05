@@ -8,11 +8,11 @@ use \PDOStatement;
 use \PDOException;
 
 // Importar traits.
-use Src\controllers\traits\singleton;
+use Src\Controllers\Traits\Singleton;
 
-class connection {
+class Connection {
 
-	use singleton;
+	use Singleton;
 
 	private PDO $conn;
 

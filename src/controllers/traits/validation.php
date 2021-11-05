@@ -1,8 +1,8 @@
 <?php
 
-namespace Src\controllers\traits;
+namespace Src\Controllers\Traits;
 
-trait validation {
+trait Validation {
 	protected function isEmpty(int|string $data, array $ignore = NULL) : bool {
 		$val = true;
 

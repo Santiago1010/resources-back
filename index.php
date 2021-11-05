@@ -1,12 +1,12 @@
 <?php
 
-include_once 'manifest/autoload.php';
+include_once 'Manifest/Autoload.php';
 
-use Src\listener\listener;
+use Src\Listener\Listener;
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
-	$listener = new listener();
+	$listener = new Listener();
 
 	// Se valida si la información es enviada con un formData.
 	if (!isset($_POST['form']) || $_POST['form'] === false) {

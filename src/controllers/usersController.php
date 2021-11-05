@@ -3,27 +3,27 @@
 namespace Src\controllers;
 
 // Se traen las cápsulas.
-use Src\models\capsules\usersClass;
+use Src\models\capsules\UsersClass;
 
 // Se usan los traits.
-use Src\controllers\traits\security;
-use Src\controllers\traits\validation;
+use Src\controllers\traits\Security;
+use Src\controllers\traits\Validation;
 
 // Se usa el modelo.
-use Src\models\usersModel;
+use Src\models\UsersModel;
 
 /**
  * Clase que cotrola y gestiona los datos de los usuarios.
  */
-class usersController {
+class UsersController {
 
-	use security;
-	use validation;
+	use Security;
+	use Validation;
 	
 	private $model;
 
 	public function __construct(?string $rol = NULL) {
-		$this->model = new usersModel($rol);
+		$this->model = new UsersModel($rol);
 	}
 
 	// Se registra el usuario y si devuelve true, envía el correo electrónico; de lo contrario, devuelve false.

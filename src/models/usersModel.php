@@ -1,14 +1,14 @@
 <?php
 
-namespace Src\models;
+namespace Src\Models;
 
 // Se usa la conexión.
-use Manifest\connection;
+use Manifest\Connection;
 
 /**
  * Clase que conecta con la base de datos de los usuarios.
  */
-class usersModel {
+class UsersModel {
 
 	private $connection;
 	

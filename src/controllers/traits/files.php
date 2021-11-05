@@ -1,11 +1,11 @@
 <?php
 
-namespace Src\controllers\traits;
+namespace Src\Controllers\Traits;
 
 /**
  * Trait que gestionará todos los archivos.
  */
-trait files {
+trait Files {
 
 	private $newName;
 	private $extension;

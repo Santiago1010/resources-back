@@ -1,8 +1,8 @@
 <?php
 
-namespace Src\controllers\traits;
+namespace Src\Controllers\Traits;
 
-trait singleton {
+trait Singleton {
 
 	private array $data;
 	private static $singleton = false;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Src\models\capsules;
+namespace Src\Models\Capsules;
 
 /**
  * Clase que encapsula los datos de los usuarios.
  */
-class usersClass {
+class UsersClass {
 
     public function __construct(
         private ?int $document = NULL,

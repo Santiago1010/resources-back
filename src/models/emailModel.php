@@ -5,7 +5,7 @@ include '../model/functions/connection.php';
 /**
  * Clase que conecta con la base de datos de los usuarios.
  */
-class emailModel {
+class EmailModel {
 
 	private $connection;
 	

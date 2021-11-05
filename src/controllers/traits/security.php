@@ -1,10 +1,10 @@
 <?php
 
-namespace Src\controllers\traits;
+namespace Src\Controllers\Traits;
 
 define('PRUBIC_KEYÑ', 'db89bb5ceab87f9c0fcc2ab36c189c2c');
 
-trait security {
+trait Security {
 
 	protected function encryptData(int|string $string) : string {
 		return $this->encryptRSA($string);

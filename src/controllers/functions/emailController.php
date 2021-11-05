@@ -17,7 +17,7 @@ require_once('../resources/libraries/PHPMailer/src/SMTP.php');
 /**
  * Clase que controlará la gestión de envío de corres electrónicos.
  */
-class emailController {
+class EmailController {
 
 	private $nameTransmitter;
 	private $emailTransmitter;
