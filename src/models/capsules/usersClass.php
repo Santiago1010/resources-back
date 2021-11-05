@@ -8,23 +8,15 @@ namespace Src\models\capsules;
 class usersClass {
 
     public function __construct(
-        private ?string $documentType = NULL,
         private ?int $document = NULL,
         private ?string $name = NULL,
         private ?string $lastName = NULL,
         private ?string $email = NULL,
         private ?int $phone = NULL,
         private ?string $password = NULL,
-        private ?string $token = NULL,
-        private ?string $emailConfirm = 'Sin confirmar',
-        private ?string $rol = NULL,
-        private ?int $regional = NULL,
-        private ?int $center = NULL
+        private ?string $token = NULL
+        private ?string $rol = NULL
     ) {}
-
-    public function getDocumentType() : string {
-        return $this->documentType;
-    }
     
     public function getDocument() : int {
         return $this->document;
@@ -54,20 +46,8 @@ class usersClass {
         return $this->token;
     }
     
-    public function getEmailConfirm() : string {
-        return $this->emailConfirm;
-    }
-    
     public function getRol() : string {
         return $this->rol;
-    }
-    
-    public function getRegional() : int {
-        return $this->regional;
-    }
-    
-    public function getCenter() : int {
-        return $this->center;
     }
 
 }

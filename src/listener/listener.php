@@ -2,34 +2,69 @@
 
 namespace Src\listener;
 
+// Se usan los traits.
+use Src\controllers\traits\responses; // Trait para gestionar las respuestas.
+
+// Se usan los controladores.
+use Src\controllers\usersController;
+
 /**
- * Clase que scucha todas las peticiones.
+ * Clase que escucha todas las peticiones.
  */
 class listener {
 
-    public function __construct() {
-       define('ERROR', 10);
-       define('DONE', 11);
-    }
+    use responses;
 
-    public function actionListener(array $data) : string {
+    public function actionListener(string $type, array $data) : string {
         $request = [];
 
-        if (isset($data)) {
-            switch ($data['case']) {
-                case 'value':
-                    // code...
+        if (isset($type) && $type !== 'GET') {
+            switch ($type) {
+                case 'PUT':
+                    $request = $this->create($data);
+                    break;
+
+                case 'POST':
+                    $request = $this->update($data)[0] === 'read' ? $this->read($data) : $this->error200('La acción se ha realizado con éxito.', 'done');
+                    break;
+
+                case 'DELETE':
+                    $request = $this->delete($data);
                     break;
                 
                 default:
-                    // code...
+                    $request = $this->error405();
                     break;
             }
         }else {
-            $request = ['status' => ERROR, 'request' => 'Petición no procesada.'];
+            $request = $this->error405();
         }
 
         return json_encode($request, JSON_UNESCAPED_UNICODE);
+    }
+
+    private function create(array $data) : array {
+        switch ($data) {
+            case 'createUser':
+                return $this->createUser($data);
+                break;
+            
+            default:
+                return ['read'];
+                break;
+        }
+    }
+
+    private function read(?array $data = NULL) : array {
+        // code...
+    }
+
+    private function update(array $data) : array {
+        // code...
+    }
+
+    private function delete(array $data) : array {
+        // code...
     }
 
 }

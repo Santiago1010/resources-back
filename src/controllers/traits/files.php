@@ -11,13 +11,13 @@ trait files {
 	private $extension;
 	private $error;
 
-	public function __construct($name, $type, $error) {
+	protected function __construct($name, $type, $error) {
 		$this->getExtension($name);
 		$this->setNewName($type);
 		$this->error = $error;
 	}
 
-	public function uploadFile($temp, $route) {
+	protected function uploadFile($temp, $route) {
 		$error = $this->validateError($this->error);
 		if ($error == 0) {
 			if (!is_dir($route)) {
@@ -29,7 +29,7 @@ trait files {
 		}
 	}
 
-	public function validateError($error) {
+	protected function validateError($error) {
 		switch ($error) {
 			case 0:
 				return 0;
@@ -57,16 +57,16 @@ trait files {
 		}
 	}
 
-	public function validateSize($file, $min = 0, $max = 20971520) {
+	protected function validateSize($file, $min = 0, $max = 20971520) {
 		return filesize($file) >= $min && filesize($file) <= $max ? true : false;
 	}
 
-	public function validateWeight($file, $minW = 0, $maxW = 10000, $minH = 0, $maxH = 10000) {
+	protected function validateWeight($file, $minW = 0, $maxW = 10000, $minH = 0, $maxH = 10000) {
 		$image = getimagesize($file);
 		return $image[0] >= $minW && $image[0] <= $maxW && $image[1] >= $minH && $image[1] <= $image[1] ? true : false;
 	}
 
-	public function validateImages($expected = ['PNG', 'JPG']) {
+	protected function validateImages($expected = ['PNG', 'JPG']) {
 		$valid = false;
 		foreach ($expected as $key => $e) {
 			if (strtolower($this->extension) == strtolower($e)) $valid = true;
@@ -99,7 +99,7 @@ trait files {
 		return str_replace(' ', '', $type);
 	}
 
-	public function getExtensionExtern() {
+	protected function getExtensionExtern() {
 		return $this->extension;
 	}
 

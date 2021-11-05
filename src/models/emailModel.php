@@ -15,8 +15,7 @@ class emailModel {
 
 	public function registerEmailDB(emailClass $email) {
 		try {
-			$ps = $this->connection->getPrepareStatement(['EmailModel', 'registrerEmail']);
-			return $this->connection->getExecute($this->connection->getBindValue(true, $ps, $hotbed, ['__construct']));
+			return $this->connection->getExecute($this->connection->getBindValue(true, $this->connection->getPrepareStatement(['EmailModel', 'registrerEmail']), $hotbed, ['__construct']));
 		} catch (PDOException $e) {
 			return 'Error PDO: ' . $e;
 		}

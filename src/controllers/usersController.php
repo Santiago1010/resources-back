@@ -53,14 +53,13 @@ class usersController {
 	}
 
 	// Se verifican y se devuelven los datos del usuario.
-	public function loginUser(int $document, string $password) : string {
-		$user = $this->model->readUsersPasswordDB(new usersClass(NULL, $document));
-		return $this->validHash($password, $this->decryptRSA($user['password_user'])) ? json_encode($this->model->readUserDataDB(new usersClass(NULL, $document)), JSON_UNESCAPED_UNICODE) : false;
+	public function loginUser(int $document, string $password) : array {
+		return $this->validHash($password, $this->decryptRSA($this->model->readUsersPasswordDB(new usersClass(NULL, $document))['password_user'])) ? $this->model->readUserDataDB(new usersClass(NULL, $document)) : [false];
 	}
 
 	// Leer todos los usuarios registrados.
-	public function readUsers() {
-		return $this->model->readUsersDB();//json_encode($this->model->readUsersDB(), JSON_UNESCAPED_UNICODE);
+	public function readUsers() : array {
+		return $this->model->readUsersDB();
 	}
 
 	// Se actualiza la contraseña. Ya sea como recuperación, o desde dentro de la plataforma.
