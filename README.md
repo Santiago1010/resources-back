@@ -13,3 +13,7 @@ Esta plantilla utiliza namespaces en las clases, traits y conexiones con singlet
   - Speed Test.
   - Debugger.
   - Error log.
+
+# Entendiendo la plantilla
+  - Las carpetas y clases, así como sus respectivos archivos, van con la primera en mayúsculas.
+  - Las funciones, variables y atributos, se someten a camellCase.
