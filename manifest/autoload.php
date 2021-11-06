@@ -12,3 +12,5 @@ date_default_timezone_set('America/Bogota');
 spl_autoload_register(function(string $clase) {
 	include_once $clase . '.php';
 });
+
+include_once 'Resources/Libraries/vendor/autoload.php';

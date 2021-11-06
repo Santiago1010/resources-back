@@ -8,8 +8,6 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\FirePHPHandler;
 
-include_once ('Resources/Libraries/vendor/autoload.php');
-
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 	// Se valida si la información es enviada con un formData.
@@ -23,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 	//print_r(json_encode(["¿Qué verga haces aquí? Esto está prohibido para los mortales."], JSON_UNESCAPED_UNICODE));
 
 	// create a log channel
-	$logger = new Logger('logs');
-	$logger->pushHandler(new StreamHandler('Src/Controllers/Logs/' . date('d-m-Y') . '_error.log', Logger::WARNING));
-	$logger->pushHandler(new FirePHPHandler());
+	//$logger = new Logger('logs');
+	//$logger->pushHandler(new StreamHandler('Src/Controllers/Logs/' . date('d-m-Y') . '_error.log', Logger::WARNING));
+	//$logger->pushHandler(new FirePHPHandler());
 
-	$logger->warning('Adding a new user', ['xD']);
+	//$logger->warning('Adding a new user', ['xD']);
 }
