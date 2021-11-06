@@ -4,29 +4,28 @@ include_once 'Manifest/Autoload.php';
 
 use Src\Listener\Listener;
 
-if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\FirePHPHandler;
 
-	$listener = new Listener();
+include_once ('Resources/Libraries/vendor/autoload.php');
+
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 	// Se valida si la información es enviada con un formData.
 	if (!isset($_POST['form']) || $_POST['form'] === false) {
 		$data = json_decode(file_get_contents("php://input"), true);
 	}
 
-	// Si entra por POST, es de lectura y actualización.
-	switch ($_SERVER['REQUEST_METHOD']) {
-		case 'POST': // Si es método es POST, puede ser para lectura y actualización (RU).
-			// code...
-			break;
-
-		case 'PUT': // Si es método es PUT, puede ser para crear datos (C).
-			// code...
-			break;
-
-		case 'DELETE': // Si es método es DELETE, puede ser para eliminar datos (D).
-			// code...
-			break;
-	}
+	$listener = new Listener();
+	$listener->actionListener($_SERVER['REQUEST_METHOD'], $_POST);
 }else {
-	print_r(json_encode(["¿Qué verga haces aquí? Esto está prohibido para los mortales."], JSON_UNESCAPED_UNICODE));
+	//print_r(json_encode(["¿Qué verga haces aquí? Esto está prohibido para los mortales."], JSON_UNESCAPED_UNICODE));
+
+	// create a log channel
+	$logger = new Logger('logs');
+	$logger->pushHandler(new StreamHandler('Src/Controllers/Logs/' . date('d-m-Y') . '_error.log', Logger::WARNING));
+	$logger->pushHandler(new FirePHPHandler());
+
+	$logger->warning('Adding a new user', ['xD']);
 }

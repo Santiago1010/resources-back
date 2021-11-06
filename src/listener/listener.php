@@ -25,7 +25,8 @@ class Listener {
                     break;
 
                 case 'POST':
-                    $request = $this->update($data)[0] === 'read' ? $this->read($data) : $this->error200('La acción se ha realizado con éxito.', 'done');
+                    $request = $this->error400();
+                    //$request = $this->update($data)[0] === 'read' ? $this->read($data) : $this->error200('La acción se ha realizado con éxito.', 'done');
                     break;
 
                 case 'DELETE':
