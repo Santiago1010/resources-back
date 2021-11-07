@@ -9,6 +9,7 @@
         "markrogoyski/math-php": "2.*",
         "devster/ubench": "~2.0.0",
         "respect/validation": "^2.2",
-        "fabpot/goutte": "^4.0"
+        "fabpot/goutte": "^4.0",
+        "botman/botman": "^2.6"
     }
 }
