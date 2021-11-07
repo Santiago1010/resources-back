@@ -29,3 +29,4 @@ Esta plantilla utiliza namespaces en las clases, traits y conexiones con singlet
   - <a href="https://github.com/devster/ubench" taget="_BLANK">Ubench</a>: Para validar velocidad y memoria de scripts.
   - <a href="https://github.com/Respect/Validation" taget="_BLANK">Validation</a>: Para validar datos.
   - <a href="https://botman.io/2.0/welcome" taget="_BLANK">BotMan</a>: Para enviar mensajes a través de distintas plataformas de chat.
+  - <a href="https://github.com/FriendsOfPHP/Goutte" taget="_BLANK">Goutte</a>: Goutte es una biblioteca de rastreo de pantalla y rastreo web para PHP.
