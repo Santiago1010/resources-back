@@ -3,7 +3,7 @@
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 header('Access-Control-Allow-Methods: POST, PUT, DELETE');
-header('Content-type: application/json');
+//header('Content-type: application/json');
 
 ini_set("default_charset", "UTF-8");
 
@@ -14,3 +14,5 @@ spl_autoload_register(function(string $clase) {
 });
 
 include_once 'Resources/Libraries/vendor/autoload.php';
+
+require_once 'Resources/Libraries/vendor/devster/ubench/src/Ubench.php';

@@ -8,6 +8,8 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\FirePHPHandler;
 
+use Src\Controllers\UsersController;
+
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 	// Se valida si la información es enviada con un formData.

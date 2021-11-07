@@ -7,10 +7,8 @@ namespace Composer\Autoload;
 class ComposerStaticInitcc1a0d2d4b28c975120ee1afa5932353
 {
     public static $files = array (
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
-        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '2df68f9e79c919e2d88506611769ed2e' => __DIR__ . '/..' . '/respect/stringifier/src/stringify.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -20,14 +18,18 @@ class ComposerStaticInitcc1a0d2d4b28c975120ee1afa5932353
         ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
             'SRL\\' => 4,
+        ),
+        'R' => 
+        array (
+            'Respect\\Validation\\' => 19,
+            'Respect\\Stringifier\\' => 20,
         ),
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
-            'Psr\\Http\\Message\\' => 17,
-            'Psr\\Http\\Client\\' => 16,
             'Psr\\Cache\\' => 10,
             'Phpfastcache\\Tests\\' => 19,
             'Phpfastcache\\' => 13,
@@ -38,12 +40,6 @@ class ComposerStaticInitcc1a0d2d4b28c975120ee1afa5932353
             'Monolog\\' => 8,
             'MathPHP\\' => 8,
         ),
-        'G' => 
-        array (
-            'GuzzleHttp\\Psr7\\' => 16,
-            'GuzzleHttp\\Promise\\' => 19,
-            'GuzzleHttp\\' => 11,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -51,9 +47,21 @@ class ComposerStaticInitcc1a0d2d4b28c975120ee1afa5932353
         array (
             0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
         ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
         'SRL\\' => 
         array (
             0 => __DIR__ . '/..' . '/simpleregex/srl-php/src',
+        ),
+        'Respect\\Validation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/respect/validation/library',
+        ),
+        'Respect\\Stringifier\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/respect/stringifier/src',
         ),
         'Psr\\SimpleCache\\' => 
         array (
@@ -62,15 +70,6 @@ class ComposerStaticInitcc1a0d2d4b28c975120ee1afa5932353
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
-        ),
-        'Psr\\Http\\Message\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
-        ),
-        'Psr\\Http\\Client\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-client/src',
         ),
         'Psr\\Cache\\' => 
         array (
@@ -96,21 +95,16 @@ class ComposerStaticInitcc1a0d2d4b28c975120ee1afa5932353
         array (
             0 => __DIR__ . '/..' . '/markrogoyski/math-php/src',
         ),
-        'GuzzleHttp\\Psr7\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
-        ),
-        'GuzzleHttp\\Promise\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
-        ),
-        'GuzzleHttp\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
-        ),
     );
 
     public static $prefixesPsr0 = array (
+        'U' => 
+        array (
+            'Ubench' => 
+            array (
+                0 => __DIR__ . '/..' . '/devster/ubench/src',
+            ),
+        ),
         'P' => 
         array (
             'Phpml' => 
