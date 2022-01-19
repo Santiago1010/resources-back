@@ -1,0 +1,34 @@
+<?php
+
+namespace Src\Controllers\Traits;
+
+trait Security {
+
+	protected function encryptData(int|string $string) : string {
+		return $this->encryptRSA($string);
+	}
+
+	protected function decryptData(int|string $data) : string {
+		return $this->decryptRSA($data);
+	}
+
+	protected function encryptRSA(int|string $string) : string {
+		$iv = base64_decode($_ENV['BASE64_ECRYPT']);
+		$encrypted = openssl_encrypt($string, $_ENV['SSL_ENCRYPT'], $_ENV['PUBLIC_KEY'], 0, $iv);
+		return base64_encode($encrypted . '::' . $iv);
+	}
+
+	protected function encryptHash(int|string $string) : string {
+		return password_hash($string, PASSWORD_DEFAULT, ['cost' => 8]);
+	}
+
+	protected function decryptRSA(int|string $data) : string {
+		list($data_encrypted, $iv) = explode('::', base64_decode($data), 2);
+		return openssl_decrypt($data_encrypted, $_ENV['SSL_ENCRYPT'], $_ENV['PUBLIC_KEY'], 0, $iv);
+	}
+
+	protected function validHash(string $string, string $hash) : bool {
+		return password_verify($string, $hash);
+	}
+
+}
