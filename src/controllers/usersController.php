@@ -45,13 +45,21 @@ class UsersController {
 
 	// Se registra el usuario y si devuelve true, envía el correo electrónico; de lo contrario, devuelve false.
 	public function createUser(int $document, string $name, string $lastName, string $email, ?int $phone = NULL, string $password) : array {
+		// Se valida que el número de documento sea un número entero y que tenga entre 7 a 10 dígitos.
 		if (v::intType()->length(7, 10)->validate($document)) {
+			// Se valida si el usuario se encuentra registrado en la tabla users.
 			if ((int) $this->model->readUserExistDB(new UsersEntity(NULL, $document))['exist'] === 0) {
+				// Se valida que el nombre sea sólo una cadena de texto.
 				if ($this->validateJustString($name)) {
+					// Se valida que el apellido sea sólo una cadena de texto.
 					if ($this->validateJustString($lastName)) {
+						// Se valida que el email ingresado, sea válido también con @misena y @sena.
 						if ($this->validateEmail($email)) {
+							// Se valida que de existir el número de teléfono, sea un número entero y que esté entre 8 a 10 dígitos.
 							if (v::intType()->length(8, 10)->validate($phone) || $phone === NULL) {
+								// Se valida que la contraseña sea mínimo de 8 caracteres.
 								if (v::stringType()->length(8, NULL)->validate($password)) {
+									// Se genera el token, basándose en el número de documento.
 									$token = $this->setMayus($this->encryptToken($this->encryptPassword($document)));
 									if ($this->model->createUserDB(new UsersEntity(NULL, $this->resetSpecialStrings($document), $this->resetSpecialStrings($name), $this->resetSpecialStrings($lastName), $this->resetSpecialStrings($email), $this->resetSpecialStrings($phone), $this->encryptRSA($this->encryptHash($this->resetSpecialStrings($password))), $token))) {
 										if ($this->sendEmailConfirm($name, $lastName, $email, $token)) {
