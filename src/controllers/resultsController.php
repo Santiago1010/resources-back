@@ -39,7 +39,7 @@ class ResultsController {
 	/*------------------------------------- Create -------------------------------------*/
 
 	// Función para crear resultados de investigación.
-	public function createResearchResult(string $projectName, string $techName, int $year, string $codeType, string $code, ?string $summary, int $trl, ?string $tipology, ?string $groupTipology, ?string $knowledeArea, ?string $subKnowledgeNetwork, ?string $knowledgeNetwork, string $dateStart, ?string $lastModification, string $rights, int $regional, int $center, int $group): array {
+	public function createResearchResult(string $projectName, string $techName, int $year, string $codeType, string $code, ?string $summary, int $trl, ?string $tipology, ?string $groupTipology, ?string $knowledeArea, ?string $subKnowledgeNetwork, ?string $knowledgeNetwork, string $dateStart, ?string $lastModification, string $rights, int $regional, int $center, int $group) : array {
 		// Se valida si el resultado de investigación no existe.
 		if (!$this->validIfExistReasearchResult($projectName, $techName, $year, $codeType, $code)) {
 			if ($this->model->createResearchResultDB(new ResearchResultEntity(NULL, $projectName, $techName, $year, $codeType, $code, $summary, $trl, $tipology, $groupTipology, $knowledeArea, $subKnowledgeNetwork, $knowledgeNetwork, $dateStart, $lastModification, $rights, $regional, $center, $group))) {
@@ -55,26 +55,35 @@ class ResultsController {
 	/*------------------------------------- Read -------------------------------------*/
 
 	// Función para leer todos los resultados de investigación.
-	public function readResearchResults() {
-		// code...
+	public function readResearchResults() : string {
+		return json_encode($this->model->readResearchResultsDB(), JSON_UNESCAPED_UNICODE);
 	}
 
-	public function validIfExistReasearchResult(string $projectName, string $techName, int $year, string $codeType, string $code): bool {
+	// Validar si un resultado de investigación ya se encuentra registrado.
+	public function validIfExistReasearchResult(string $projectName, string $techName, int $year, string $codeType, string $code) : bool {
 		return $this->model->validIfExistReasearchResultDB(new ResearchResultEntity(NULL, $projectName, $techName, $year, $codeType, $code));
 	}
 
 	/*------------------------------------- Update -------------------------------------*/
 
 	// Función para actualizar un resultado de investigación.
-	public function updateResearchResult(int $id, string $projectName, string $techName, int $year, string $codeType, string $code, ?string $summary, int $trl, ?string $tipology, ?string $groupTipology, ?string $knowledeArea, ?string $subKnowledgeNetwork, ?string $knowledgeNetwork, string $dateStart, ?string $lastModification, string $rights, int $regional, int $center, int $group) {
-		// code...
+	public function updateResearchResult(int $id, string $projectName, string $techName, int $year, string $codeType, string $code, ?string $summary, int $trl, ?string $tipology, ?string $groupTipology, ?string $knowledeArea, ?string $subKnowledgeNetwork, ?string $knowledgeNetwork, string $dateStart, ?string $lastModification, string $rights, int $regional, int $center, int $group) : array {
+		if ($this->model->updateResearchResultDB(new ResearchResultEntity($id, $projectName, $techName, $year, $codeType, $code, $summary, $trl, $tipology, $groupTipology, $knowledeArea, $subKnowledgeNetwork, $knowledgeNetwork, $dateStart, $lastModification, $rights, $regional, $center, $group))) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	/*------------------------------------- Delete -------------------------------------*/
 
 	// Función para eliminar un resultado de investigación.
-	public function updateResearchResult(int $id) {
-		// code...
+	public function deleteResearchResult(int $id) : array {
+		if ($this->model->deleteResearchResultDB(new ResearchResultEntity($id))) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	/*------------------------------------- Complements -------------------------------------*/
