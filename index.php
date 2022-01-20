@@ -8,6 +8,7 @@ use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
 
 use Src\Controllers\UsersController;
+use Src\Controllers\ResultsController;
 
 $dot = Dotenv\Dotenv::createImmutable(__DIR__);
 $dot->load();
@@ -36,10 +37,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 
 // Funciones con el método GET, para Leer (R).
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+	// LLamar list de usuarios.
 	$router->group(['before' => 'read'], function($router) {
 		$router->get('users', function() {
 			$user = new UsersController();
 			return $user->readUsers();
+		});
+	});
+
+	// Llamar lista de resultados de investigación.
+	$router->group(['before' => 'read'], function($router) {
+		$router->get('results/{document}', function($document) {
+			$ri = new ResultsController();
+			print_r($ri->readResearchResults((int)$document));
 		});
 	});
 }

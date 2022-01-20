@@ -2,8 +2,12 @@
 
 namespace Src\Controllers;
 
+// Se usan los modelos.
+use Src\Models\ResultsModel;
+
 // Se usan las cápsulas.
 use Src\Models\Capsules\ResearchResultEntity;
+use Src\Models\Capsules\UsersEntity;
 
 // Se usan los traits.
 use Src\Controllers\Traits\Security;
@@ -31,6 +35,7 @@ class ResultsController {
 
 	// Se crea el método constructor.
 	public function __construct() {
+		$this->model = new ResultsModel();
 		$this->logger = new Logger('logs_user');
 		$this->logger->pushHandler(new StreamHandler('Src/Controllers/Logs/' . date('d-m-Y') . '_users_error.log', Logger::INFO));
 		$this->logger->pushHandler(new FirePHPHandler());
@@ -55,8 +60,20 @@ class ResultsController {
 	/*------------------------------------- Read -------------------------------------*/
 
 	// Función para leer todos los resultados de investigación.
-	public function readResearchResults() : string {
-		return json_encode($this->model->readResearchResultsDB(), JSON_UNESCAPED_UNICODE);
+	// Leer todos los resultados de investigación.
+	public function readResearchResults(int $document) : ?string {
+		$user = $this->model->readUserDataDB(new UsersEntity(NULL, $document));
+		if ($user['rol'] == 'aXVPYm9ZK09yUVJxTkJhSXdRNmNjdz09OjoL18HGXURa1hMvX8zyN+y3' || $user['rol'] == 'WWZKNmRrYWk5cURsNnVEeE0yaTE2dz09OjoL18HGXURa1hMvX8zyN+y3') {
+			$own = $this->model->readOwnRiADB(new UsersEntity(NULL, $document));
+			$other = $this->model->readOtherRiADB(new UsersEntity(NULL, $document));
+		}elseif ($user['rol'] == 'SnZDNWcvSGZIeDlLUGlpUkx6SGFBZz09OjoL18HGXURa1hMvX8zyN+y3') {
+			$own = $this->model->readOwnRiBDB(new UsersEntity(NULL, $document, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, (int)$user['id_regional']));
+			$other = $this->model->readOtherRiBDB(new UsersEntity(NULL, $document, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, (int)$user['id_regional']));
+		}elseif ($user['rol'] == 'Nk1vTjZlRWJjVGFHaFloUkxGYlN5Zz09OjoL18HGXURa1hMvX8zyN+y3') {
+			$own = $this->model->readRiCDB(new UsersEntity(NULL, $document, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, (int)$user['id_regional']));
+			$other = $this->model->readRiCDB(new UsersEntity(NULL, $document, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, (int)$user['id_regional']));
+		}
+		return $user['rol'] != 'Nk1vTjZlRWJjVGFHaFloUkxGYlN5Zz09OjoL18HGXURa1hMvX8zyN+y3' ? json_encode(array_merge($own, $other), JSON_UNESCAPED_UNICODE) : json_encode($own, JSON_UNESCAPED_UNICODE);
 	}
 
 	// Validar si un resultado de investigación ya se encuentra registrado.
