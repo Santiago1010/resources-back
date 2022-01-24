@@ -3,6 +3,7 @@
 namespace Src\Controllers;
 
 // Se usan otros controladores.
+use Src\Controllers\Controller;
 use Src\Controllers\Functions\EmailController;
 
 // Se usan las cápsulas.
@@ -27,7 +28,7 @@ use Monolog\Handler\FirePHPHandler;
 /**
  * Clase que cotrola y gestiona los datos de los usuarios.
  */
-class UsersController {
+class UsersController extends Controller {
 
 	use Security;
 	use Validation;
@@ -125,8 +126,12 @@ class UsersController {
 	}
 
 	// Se verifican y se devuelven los datos del usuario.
-	public function loginUser(int $document, string $password) : array {
-		return $this->validHash($password, $this->decryptRSA($this->model->readUsersPasswordDB(new UsersEntity(NULL, $document))['password_user'])) ? $this->model->readUserDataDB(new UsersEntity(NULL, $document)) : [false];
+	public function loginUser() {
+		$_POST = $this->fileGetContents();
+		if ($this->validHash(getallheaders()['Origin'] . $_ENV['TOKEN_API'], getallheaders()['Authorization'])) {
+			extract($_POST);
+			print_r(json_encode($this->validHash($this->encryptPassword($password), $this->decryptRSA($this->model->readUsersPasswordDB(new UsersEntity(NULL, $document))['password'])) ? $this->model->readUserDataDB(new UsersEntity(NULL, $document)) : [false], JSON_UNESCAPED_UNICODE));
+		}
 	}
 
 	// Leer todos los usuarios registrados.
@@ -135,8 +140,8 @@ class UsersController {
 	}
 
 	// Se actualiza la contraseña. Ya sea como recuperación, o desde dentro de la plataforma.
-	public function updatePasswordUser(int $document, string $password) : bool {
-		$user = new UsersEntity('C.C.', $document, NULL, NULL, NULL, NULL, $password);
+	public function updatePasswordUser(int $document, string $password) {
+		$user = new UsersEntity(NULL, $document, NULL, NULL, NULL, NULL, $password);
 		return $this->model->updatePasswordUserDB($user);
 	}
 

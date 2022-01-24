@@ -85,9 +85,9 @@ class UsersModel {
 	}
 
 	// Se actualiza la contraseña del usuario.
-	public function updatePasswordUserDB(UsersEntity $user) : bool {
+	public function updatePasswordUserDB(UsersEntity $user) {
 		try {
-			return $this->connection->fetch($this->connection->getBindValue(false, $this->connection->prepare(['UsersModel', 'updatePassword']), $user, ['getPassword']), false);
+			return $this->connection->getBindValue(false, $this->connection->prepare(['UsersModel', 'updatePassword']), $user, ['getDocument', 'getPassword'])->execute();
 		} catch (PDOException $e) {
 			return 'Error PDO: ' . $e;
 		}

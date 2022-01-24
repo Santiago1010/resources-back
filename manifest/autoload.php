@@ -1,11 +1,13 @@
 <?php
 
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization");
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Content-type: application/json');
 
 ini_set("default_charset", "UTF-8");
+
+session_start();
 
 date_default_timezone_set('America/Bogota');
 

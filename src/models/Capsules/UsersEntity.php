@@ -8,7 +8,7 @@ namespace Src\Models\Capsules;
 class UsersEntity {
 
     public function __construct(
-        private ?int $id = NULL,
+        private ?string $documentType = NULL,
         private ?int $document = NULL,
         private ?string $name = NULL,
         private ?string $lastName = NULL,
@@ -19,8 +19,8 @@ class UsersEntity {
         private ?string $state = NULL
     ) {}
     
-    public function getId() : int {
-        return $this->id;
+    public function getDocumentType() : string {
+        return $this->documentType;
     }
     
     public function getDocument() : int {

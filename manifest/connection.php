@@ -92,7 +92,7 @@ class Connection {
 				"createUser" => "CALL createUsers(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", // Registrar usuario.
 				"createTemporaryUser" => "CALL createTemporaryUser(?, ?)", // Se crea un usuario temporal.
 				"confirmUsers" => "CALL confirmUsers(?)", // Confirmar correo electrónico del usuario.
-				"read_user_password" => "SELECT password_user FROM new_valtec.read_user_password WHERE read_user_password.document_user = ?", // Leer el hash de la contraseña.
+				"read_user_password" => "SELECT password FROM new_valtec.read_user_password WHERE read_user_password.document_user = ?", // Leer el hash de la contraseña.
 				"read_user_data" => "SELECT * FROM new_valtec.read_user_data WHERE read_user_data.document = ? AND emailConfirm = 'Confirmado'", // Leer los datos relevantes del usuario.
 				"read_user_exist" => "SELECT COUNT(document) AS countExist FROM new_valtec.read_user_data WHERE document = ?", // Se verifica si el usuario existe.
 				"read_users_data" => "SELECT * FROM new_valtec.read_user_data", // Leer los datos relevantes de todos los usuarios.

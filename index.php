@@ -10,8 +10,7 @@ use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
 use Src\Controllers\UsersController;
 use Src\Controllers\ResultsController;
 
-$dot = Dotenv\Dotenv::createImmutable(__DIR__);
-$dot->load();
+(Dotenv\Dotenv::createImmutable(__DIR__))->load();
 
 $router = new RouteCollector();
 
@@ -19,7 +18,46 @@ $router->get("/", function() {
 	return "No puedes estar aquí.";
 });
 
-// Funciones con el método PUT, para Crear (C).
+// Funciones con el método POST, para Crear (C).
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	$router->group(['before' => 'update'], function($router) {
+		$router->post('users', function() {
+			$_POST = json_decode(file_get_contents("php://input"), true);
+			$user = new UsersController();
+			extract($_POST['userData']);
+			return $user->readUsers();
+		});
+	});
+
+	$router->group(['prefix' => 'user'], function($router) {
+		$router->post('login', [Src\Controllers\UsersController::class, "loginUser"]);
+	});
+}
+
+// Funciones con el método GET, para Leer (R).
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+	// LLamar lista de usuarios.
+	$router->group(['before' => 'read'], function($router) {
+		$router->get('users', function() {
+			print_r((new UsersController())->readUsers());
+		});
+	});
+
+	// Llamar lista de resultados de investigación.
+	$router->group(['before' => 'read'], function($router) {
+		$router->get('results/{document}', function($document) {
+			print_r((new ResultsController())->readResearchResults((int)$document));
+		});
+	});
+
+	$router->group(['prefix' => 'get'], function($router) {
+		$router->get('token', function() {
+			print_r(password_hash($_ENV['ORIGIN'] . $_ENV['TOKEN_API'], PASSWORD_DEFAULT, ['cost' => 10]));
+		});
+	});
+}
+
+// Funciones con el método PUT, para Actualizar (U).
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 	$router->group(['before' => 'create'], function($router) {
 		$router->get('entrada', function() {
@@ -31,37 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 			$user = new UsersController();
 			extract($_POST['userData']);
 			return $user->createUser($document, $name, $lastName, $email, $phone, 'Amo_Bleach.4');
-		});
-	});
-}
-
-// Funciones con el método GET, para Leer (R).
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-	// LLamar list de usuarios.
-	$router->group(['before' => 'read'], function($router) {
-		$router->get('users', function() {
-			$user = new UsersController();
-			return $user->readUsers();
-		});
-	});
-
-	// Llamar lista de resultados de investigación.
-	$router->group(['before' => 'read'], function($router) {
-		$router->get('results/{document}', function($document) {
-			$ri = new ResultsController();
-			print_r($ri->readResearchResults((int)$document));
-		});
-	});
-}
-
-// Funciones con el método POST, para Actualizar (U).
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$router->group(['before' => 'update'], function($router) {
-		$router->post('users', function() {
-			$_POST = json_decode(file_get_contents("php://input"), true);
-			$user = new UsersController();
-			extract($_POST['userData']);
-			return $user->readUsers();
 		});
 	});
 }

@@ -13,8 +13,8 @@ trait Security {
 	}
 
 	protected function encryptRSA(int|string $string) : string {
-		$iv = base64_decode($_ENV['BASE64_ECRYPT']);
-		$encrypted = openssl_encrypt($string, $_ENV['SSL_ENCRYPT'], $_ENV['PUBLIC_KEY'], 0, $iv);
+		$iv = base64_decode('C9fBxl1EWtYTL1/M8jfstw==');
+		$encrypted = openssl_encrypt($string, 'aes-256-cbc', 'db89bb5ceab87f9c0fcc2ab36c189c2c', 0, $iv);
 		return base64_encode($encrypted . '::' . $iv);
 	}
 
@@ -24,7 +24,7 @@ trait Security {
 
 	protected function decryptRSA(int|string $data) : string {
 		list($data_encrypted, $iv) = explode('::', base64_decode($data), 2);
-		return openssl_decrypt($data_encrypted, $_ENV['SSL_ENCRYPT'], $_ENV['PUBLIC_KEY'], 0, $iv);
+		return openssl_decrypt($data_encrypted, 'aes-256-cbc', 'db89bb5ceab87f9c0fcc2ab36c189c2c', 0, $iv);
 	}
 
 	protected function validHash(string $string, string $hash) : bool {
