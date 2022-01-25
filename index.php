@@ -20,13 +20,8 @@ $router->get("/", function() {
 
 // Funciones con el método POST, para Crear (C).
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$router->group(['before' => 'update'], function($router) {
-		$router->post('users', function() {
-			$_POST = json_decode(file_get_contents("php://input"), true);
-			$user = new UsersController();
-			extract($_POST['userData']);
-			return $user->readUsers();
-		});
+	$router->group(['prefix' => 'update'], function($router) {
+		$router->post('users', [Src\Controllers\UsersController::class, "updateUser"]);
 	});
 
 	$router->group(['prefix' => 'user'], function($router) {
@@ -37,14 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Funciones con el método GET, para Leer (R).
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	// LLamar lista de usuarios.
-	$router->group(['before' => 'read'], function($router) {
-		$router->get('users', function() {
-			print_r((new UsersController())->readUsers());
-		});
+	$router->group(['prefix' => 'read'], function($router) {
+		$router->get('users', (new UsersController())->readUsers());
 	});
 
 	// Llamar lista de resultados de investigación.
-	$router->group(['before' => 'read'], function($router) {
+	$router->group(['prefix' => 'read'], function($router) {
 		$router->get('results/{document}', function($document) {
 			print_r((new ResultsController())->readResearchResults((int)$document));
 		});
@@ -59,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 // Funciones con el método PUT, para Actualizar (U).
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-	$router->group(['before' => 'create'], function($router) {
+	$router->group(['prefix' => 'create'], function($router) {
 		$router->get('entrada', function() {
 			return 'Bienvenido a la entrada';
 		});
@@ -75,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 
 // Funciones con el método DELETE, para Actualizar (D).
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-	$router->group(['before' => 'DELETE'], function($router) {
+	$router->group(['prefix' => 'DELETE'], function($router) {
 		$router->delete('users', function() {
 			$_POST = json_decode(file_get_contents("php://input"), true);
 			$user = new UsersController();
