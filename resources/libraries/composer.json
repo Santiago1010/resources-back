@@ -1,0 +1,19 @@
+{
+    "require": {
+        "monolog/monolog": "^2.3",
+        "phpmailer/phpmailer": "^6.5",
+        "php-ai/php-ml": "^0.4.1",
+        "filp/whoops": "^2.14",
+        "markrogoyski/math-php": "2.*",
+        "devster/ubench": "~2.0.0",
+        "respect/validation": "^2.2",
+        "fabpot/goutte": "^4.0",
+        "tijsverkoyen/css-to-inline-styles": "^2.2",
+        "dompdf/dompdf": "^1.0",
+        "phroute/phroute": "^2.1",
+        "vlucas/phpdotenv": "^5.3"
+    },
+    "require-dev": {
+        "phpmd/phpmd" : "@stable"
+    }
+}
