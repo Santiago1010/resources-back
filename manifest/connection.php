@@ -19,7 +19,6 @@ class Connection {
 	private string $host = 'localhost';
 	private string $db_name = 'new_valtec';
 	private string $user = 'root';
-	private string $port = '3306';
 	private string $password = '';
 	private $options = [
 		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -35,20 +34,6 @@ class Connection {
 			$this->conn = false;
 		}
 	}
-
-	/*private function setConnection(?string $rol) : void {
-		switch ($rol) {
-			case 'aXVPYm9ZK09yUVJxTkJhSXdRNmNjdz09OjoL18HGXURa1hMvX8zyN+y3':
-				$this->user = 'valtec_712faMqkJB0vo_admin';
-				$this->password = '530AQXm1xPkeAuIT';
-				break;
-			
-			default:
-				$this->user = 'readRol';
-				$this->password = 'X(HLWFb[(Z/8etgc';
-				break;
-		}
-	}*/
 
 	public function getBindValue(bool $inverted, $ps, Object $object, array $function) : PDOStatement {
 		$methods = get_class_methods($object);
