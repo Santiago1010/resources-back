@@ -27,3 +27,5 @@ Esta plantilla utiliza namespaces en las clases, traits y conexiones con singlet
   - <a href="https://github.com/tijsverkoyen/CssToInlineStyles" taget="_BLANK">CssToInlineStyles class</a>: Para agregar estilos CSS embedidos a etiquetas.
   - <a href="https://github.com/mrjgreen/phroute" taget="_BLANK">PHP Route</a>: Para recibir datos de distintos métodos enviados por axios.
   - <a href="https://github.com/vlucas/phpdotenv" taget="_BLANK">Dotenv</a>: Para recibir datos guardados en el .env.
+  - <a href="https://github.com/Sleon4/Lion-Route" taget="_BLANK">Lion-Route</a>: Para configuración sencilla y funcional en todos los ambientes de PHP Route.
+  - <a href="https://github.com/Sleon4/Lion-SQL" taget="_BLANK">Lion-SQL</a>: ORM sencillo y liviano para el manejo de peticiones MySQL.
